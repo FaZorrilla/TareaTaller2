@@ -2,10 +2,9 @@ import Router from '@koa/router';
 
 export const artistsRouter = new Router();
 
-import { getAll } from './getAll';
-import { add } from './add';
-import { router } from '../../routes';
+import { getAll } from './getAll.js';
+import { add } from './add.js';
 
 //router.<metodo>(ruta relativa, method)
-router.get('/', getAll);
-router.post('/', add);
+artistsRouter.get('/', getAll);
+artistsRouter.post('/', add);

@@ -1,9 +1,9 @@
-const Koa = require("koa");
-const body = require("koa-body");
+import Koa from 'koa';
+import body from 'koa-body';
 
 export const app = new Koa();
 
-import { router } from "./routes";
+import { router } from './routes.js';
 
 app.use(body());
 
