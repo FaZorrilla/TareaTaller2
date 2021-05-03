@@ -10,9 +10,14 @@ export const getTracks = async (ctx) => {
       tracks: true,
     },
   });
-  console.log(artist);
-  const tracks = artist.tracks;
-  console.log(tracks);
-  ctx.body = tracks;
-  ctx.status = 200;
+  if (artist) {
+    console.log(artist);
+    const tracks = artist.tracks;
+    console.log(tracks);
+    ctx.body = tracks;
+    ctx.status = 200;
+  } else {
+    ctx.body = 'No existe el artista';
+    ctx.status = 404;
+  }
 };

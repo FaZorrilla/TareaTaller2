@@ -7,6 +7,11 @@ export const getOne = async (ctx) => {
       id: ctx.params.artistId,
     },
   });
-  ctx.body = artist;
-  ctx.status = 200;
+  if (artist) {
+    ctx.body = artist;
+    ctx.status = 200;
+  } else {
+    ctx.body = 'No existe el artista';
+    ctx.status = 404;
+  }
 };

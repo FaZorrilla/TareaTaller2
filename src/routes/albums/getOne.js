@@ -8,7 +8,12 @@ export const getOne = async (ctx) => {
       id: ctx.params.albumId,
     },
   });
-  console.log(album);
-  ctx.body = album;
-  ctx.status = 200;
+  if (album) {
+    console.log(album);
+    ctx.body = album;
+    ctx.status = 200;
+  } else {
+    ctx.body = 'No existe el album';
+    ctx.status = 404;
+  }
 };

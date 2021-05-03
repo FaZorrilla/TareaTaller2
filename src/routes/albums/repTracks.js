@@ -10,21 +10,26 @@ export const repTracks = async (ctx) => {
       tracks: true,
     },
   });
-  var i;
-  for (i = 0; i < album.tracks.length; i++) {
-    await prisma.track.update({
-      where: {
-        id: album.tracks[i].id,
-      },
-      data: {
-        timesPlayed: {
-          increment: 1,
+  if (album) {
+    var i;
+    for (i = 0; i < album.tracks.length; i++) {
+      await prisma.track.update({
+        where: {
+          id: album.tracks[i].id,
         },
-      },
-    });
-  }
-  console.log(album);
+        data: {
+          timesPlayed: {
+            increment: 1,
+          },
+        },
+      });
+    }
+    console.log(album);
 
-  ctx.body = album.tracks;
-  ctx.status = 200;
+    ctx.body = album.tracks;
+    ctx.status = 200;
+  } else {
+    ctx.body = 'No existe el album';
+    ctx.status = 404;
+  }
 };

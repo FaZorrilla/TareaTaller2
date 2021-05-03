@@ -7,6 +7,11 @@ export const getOne = async (ctx) => {
       id: ctx.params.trackId,
     },
   });
-  ctx.body = track;
-  ctx.status = 200;
+  if (track) {
+    ctx.body = track;
+    ctx.status = 200;
+  } else {
+    ctx.body = 'No existe el track';
+    ctx.status = 404;
+  }
 };

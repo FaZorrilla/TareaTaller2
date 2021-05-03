@@ -10,21 +10,26 @@ export const repTracks = async (ctx) => {
       tracks: true,
     },
   });
-  var i;
-  for (i = 0; i < artist.tracks.length; i++) {
-    await prisma.track.update({
-      where: {
-        id: artist.tracks[i].id,
-      },
-      data: {
-        timesPlayed: {
-          increment: 1,
+  if (artist) {
+    var i;
+    for (i = 0; i < artist.tracks.length; i++) {
+      await prisma.track.update({
+        where: {
+          id: artist.tracks[i].id,
         },
-      },
-    });
-  }
-  console.log(artist);
+        data: {
+          timesPlayed: {
+            increment: 1,
+          },
+        },
+      });
+    }
+    console.log(artist);
 
-  ctx.body = artist.tracks;
-  ctx.status = 200;
+    ctx.body = artist.tracks;
+    ctx.status = 200;
+  } else {
+    ctx.body = 'No existe el artista';
+    ctx.status = 404;
+  }
 };
