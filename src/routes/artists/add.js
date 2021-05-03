@@ -7,13 +7,23 @@ export const add = async (ctx) => {
   console.log(args);
   const idnam = btoa(args.name);
   const idname = idnam.substring(0, 22);
-  const artist = await prisma.artist.create({
-    data: {
-      name: args.name,
-      age: args.age,
+  const ifExist = await prisma.artist.findUnique({
+    where: {
       id: idname,
     },
   });
-  ctx.body = artist;
-  ctx.status = 201;
+  if (ifExist) {
+    ctx.body = ifExist;
+    ctx.status = 409;
+  } else {
+    const artist = await prisma.artist.create({
+      data: {
+        name: args.name,
+        age: args.age,
+        id: idname,
+      },
+    });
+    ctx.body = artist;
+    ctx.status = 201;
+  }
 };

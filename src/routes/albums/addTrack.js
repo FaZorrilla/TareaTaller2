@@ -13,21 +13,30 @@ export const addTrack = async (ctx) => {
       id: ctx.params.albumId,
     },
   });
-  const track = await prisma.track.create({
-    data: {
-      name: args.name,
-      duration: args.duration,
-      timesPlayed: args.timesPlayed,
-      artist: {
-        connect: { id: album.artistId },
-      },
-      album: {
-        connect: { id: ctx.params.albumId },
-      },
+  const ifExist = await prisma.track.findUnique({
+    where: {
       id: idtrack,
     },
   });
-  ctx.body = track;
-  ctx.status = 201;
-  // => { category: 'programming', title: 'how-to-node' }
+  if (ifExist) {
+    ctx.body = ifExist;
+    ctx.status = 409;
+  } else {
+    const track = await prisma.track.create({
+      data: {
+        name: args.name,
+        duration: args.duration,
+        timesPlayed: args.timesPlayed,
+        artist: {
+          connect: { id: album.artistId },
+        },
+        album: {
+          connect: { id: ctx.params.albumId },
+        },
+        id: idtrack,
+      },
+    });
+    ctx.body = track;
+    ctx.status = 201;
+  }
 };
