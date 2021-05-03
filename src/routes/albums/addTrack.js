@@ -70,6 +70,8 @@ export const addTrack = async (ctx) => {
         track[
           'self'
         ] = `https://tarea2tallerfz.herokuapp.com/tracks/${idtrack}`;
+        delete track['artistId'];
+        delete track['albumId'];
         ctx.body = track;
         ctx.status = 201;
       }
