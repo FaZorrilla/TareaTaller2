@@ -26,6 +26,13 @@ export const add = async (ctx) => {
           id: idname,
         },
       });
+      artist[
+        'albums'
+      ] = `https://tarea2tallerfz.herokuapp.com/artists/${idname}/albums`;
+      artist[
+        'tracks'
+      ] = `https://tarea2tallerfz.herokuapp.com/artists/${idname}/tracks`;
+      artist['self'] = `https://tarea2tallerfz.herokuapp.com/artists/${idname}`;
       ctx.body = artist;
       ctx.status = 201;
     }

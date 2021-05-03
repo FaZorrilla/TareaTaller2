@@ -43,6 +43,15 @@ export const addTrack = async (ctx) => {
             id: idtrack,
           },
         });
+        track[
+          'artist'
+        ] = `https://tarea2tallerfz.herokuapp.com/artists/${album.artistId}`;
+        track[
+          'album'
+        ] = `https://tarea2tallerfz.herokuapp.com/albums/${ctx.params.albumId}`;
+        track[
+          'self'
+        ] = `https://tarea2tallerfz.herokuapp.com/tracks/${idtrack}`;
         ctx.body = track;
         ctx.status = 201;
       }

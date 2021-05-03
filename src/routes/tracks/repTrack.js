@@ -6,6 +6,10 @@ export const repTrack = async (ctx) => {
     where: {
       id: ctx.params.trackId,
     },
+    include: {
+      artist: true,
+      album: true,
+    },
   });
   if (track) {
     const repTrack = await prisma.track.update({
@@ -18,6 +22,16 @@ export const repTrack = async (ctx) => {
         },
       },
     });
+    console.log(repTrack);
+    repTrack[
+      'artist'
+    ] = `https://tarea2tallerfz.herokuapp.com/artists/${track.artist.id}`;
+    repTrack[
+      'album'
+    ] = `https://tarea2tallerfz.herokuapp.com/albums/${track.album.id}`;
+    repTrack[
+      'self'
+    ] = `https://tarea2tallerfz.herokuapp.com/tracks/${track.id}`;
     ctx.body = repTrack;
     ctx.status = 200;
   } else {
