@@ -7,5 +7,5 @@ export const delArtist = async (ctx) => {
       id: ctx.params.artistId,
     },
   });
-  ctx.status = 200;
+  ctx.status = 204;
 };

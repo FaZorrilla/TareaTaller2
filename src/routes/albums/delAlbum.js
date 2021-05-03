@@ -7,5 +7,5 @@ export const delAlbum = async (ctx) => {
       id: ctx.params.albumId,
     },
   });
-  ctx.status = 200;
+  ctx.status = 204;
 };

@@ -6,5 +6,5 @@ export const delTrack = async (ctx) => {
       id: ctx.params.trackId,
     },
   });
-  ctx.status = 200;
+  ctx.status = 204;
 };
