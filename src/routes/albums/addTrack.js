@@ -51,7 +51,7 @@ export const addTrack = async (ctx) => {
           data: {
             name: args.name,
             duration: args.duration,
-            timesPlayed: 0,
+            times_played: 0,
             artist: {
               connect: { id: album.artistId },
             },
