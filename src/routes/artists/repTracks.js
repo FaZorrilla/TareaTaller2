@@ -18,7 +18,7 @@ export const repTracks = async (ctx) => {
           id: artist.tracks[i].id,
         },
         data: {
-          timesPlayed: {
+          times_played: {
             increment: 1,
           },
         },
