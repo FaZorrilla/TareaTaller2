@@ -26,7 +26,25 @@ export const addTrack = async (ctx) => {
         },
       });
       if (ifExist) {
-        ctx.body = ifExist;
+        const track = await prisma.track.findUnique({
+          where: {
+            id: idtrack,
+          },
+          include: {
+            artist: true,
+            album: true,
+          },
+        });
+        track[
+          'artist'
+        ] = `https://tarea2tallerfz.herokuapp.com/artists/${album.artistId}`;
+        track[
+          'album'
+        ] = `https://tarea2tallerfz.herokuapp.com/albums/${ctx.params.albumId}`;
+        track[
+          'self'
+        ] = `https://tarea2tallerfz.herokuapp.com/tracks/${idtrack}`;
+        ctx.body = track;
         ctx.status = 409;
       } else {
         const track = await prisma.track.create({

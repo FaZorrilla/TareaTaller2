@@ -16,7 +16,19 @@ export const add = async (ctx) => {
       },
     });
     if (ifExist) {
-      ctx.body = ifExist;
+      const artist = await prisma.artist.findUnique({
+        where: {
+          id: idname,
+        },
+      });
+      artist[
+        'albums'
+      ] = `https://tarea2tallerfz.herokuapp.com/artists/${idname}/albums`;
+      artist[
+        'tracks'
+      ] = `https://tarea2tallerfz.herokuapp.com/artists/${idname}/tracks`;
+      artist['self'] = `https://tarea2tallerfz.herokuapp.com/artists/${idname}`;
+      ctx.body = artist;
       ctx.status = 409;
     } else {
       const artist = await prisma.artist.create({
