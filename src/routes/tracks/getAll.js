@@ -5,6 +5,7 @@ export const getAll = async (ctx) => {
   const tracks = await prisma.track.findMany({
     include: {
       artist: true,
+      album: true,
     },
   });
   var i;
@@ -19,6 +20,9 @@ export const getAll = async (ctx) => {
     tracks[i][
       'self'
     ] = `https://tarea2tallerfz.herokuapp.com/tracks/${tracks[i].id}`;
+    delete tracks[i]['artistId'];
+    delete tracks[i]['albumId'];
+    delete tracks[i]['id'];
   }
   ctx.body = tracks;
   ctx.status = 200;

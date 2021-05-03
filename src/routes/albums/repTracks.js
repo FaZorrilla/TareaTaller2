@@ -50,6 +50,9 @@ export const repTracks = async (ctx) => {
       tracks[i][
         'self'
       ] = `https://tarea2tallerfz.herokuapp.com/tracks/${tracks[i].id}`;
+      delete tracks[i]['artistId'];
+      delete tracks[i]['albumId'];
+      delete tracks[i]['id'];
       console.log('Pase');
     }
 

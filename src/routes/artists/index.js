@@ -19,4 +19,4 @@ artistsRouter.get('/:artistId', getOne);
 artistsRouter.get('/:artistId/albums', getAlbums);
 artistsRouter.get('/:artistId/tracks', getTracks);
 artistsRouter.del('/:artistId', delArtist);
-artistsRouter.put('/:artistId/tracks/play', repTracks);
+artistsRouter.put('/:artistId/albums/play', repTracks);

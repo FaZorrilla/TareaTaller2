@@ -32,6 +32,9 @@ export const repTrack = async (ctx) => {
     repTrack[
       'self'
     ] = `https://tarea2tallerfz.herokuapp.com/tracks/${track.id}`;
+    delete repTrack['artistId'];
+    delete repTrack['albumId'];
+    delete repTrack['id'];
     ctx.body = repTrack;
     ctx.status = 200;
   } else {
