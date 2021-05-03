@@ -28,12 +28,12 @@ model Album {
 }
 
 model Track {
-  id           String  @id
-  name         String
-  duration     Float
-  times_played Int
-  artist       Artist? @relation(fields: [artistId], references: [id])
-  artistId     String?
-  album        Album?  @relation(fields: [albumId], references: [id])
-  albumId      String?
+  id          String  @id
+  name        String
+  duration    Float
+  timesPlayed Int
+  artist      Artist? @relation(fields: [artistId], references: [id])
+  artistId    String?
+  album       Album?  @relation(fields: [albumId], references: [id])
+  albumId     String?
 }

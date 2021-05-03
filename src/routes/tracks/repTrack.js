@@ -17,7 +17,7 @@ export const repTrack = async (ctx) => {
         id: ctx.params.trackId,
       },
       data: {
-        times_played: {
+        timesPlayed: {
           increment: 1,
         },
       },
