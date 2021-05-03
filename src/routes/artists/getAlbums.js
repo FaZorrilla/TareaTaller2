@@ -11,8 +11,22 @@ export const getAlbums = async (ctx) => {
     },
   });
   if (artist) {
-    console.log(artist);
     const albums = artist.albums;
+    var i;
+    for (i = 0; i < albums.length; i++) {
+      console.log(albums[i]);
+      albums[i][
+        'artist'
+      ] = `https://tarea2tallerfz.herokuapp.com/artists/${artist.id}`;
+      albums[i][
+        'tracks'
+      ] = `https://tarea2tallerfz.herokuapp.com/albums/${albums[i].id}/tracks`;
+      albums[i][
+        'self'
+      ] = `https://tarea2tallerfz.herokuapp.com/albums/${albums[i].id}`;
+    }
+    console.log(artist);
+
     console.log(albums);
     ctx.body = albums;
     ctx.status = 200;

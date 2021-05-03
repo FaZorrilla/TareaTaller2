@@ -8,6 +8,15 @@ export const getOne = async (ctx) => {
     },
   });
   if (artist) {
+    artist[
+      'albums'
+    ] = `https://tarea2tallerfz.herokuapp.com/artists/${artist.id}/albums`;
+    artist[
+      'tracks'
+    ] = `https://tarea2tallerfz.herokuapp.com/artists/${artist.id}/tracks`;
+    artist[
+      'self'
+    ] = `https://tarea2tallerfz.herokuapp.com/artists/${artist.id}`;
     ctx.body = artist;
     ctx.status = 200;
   } else {
