@@ -25,8 +25,35 @@ export const repTracks = async (ctx) => {
       });
     }
     console.log(album);
+    const tracks = album.tracks;
 
-    ctx.body = album.tracks;
+    var i;
+    for (i = 0; i < tracks.length; i++) {
+      console.log(tracks[i]);
+      const track = await prisma.track.findUnique({
+        where: {
+          id: tracks[i].id,
+        },
+        include: {
+          artist: true,
+          album: true,
+        },
+      });
+      tracks[i][
+        'artist'
+      ] = `https://tarea2tallerfz.herokuapp.com/artists/${track.artist.id}`;
+      console.log('Entre artist');
+      tracks[i][
+        'albums'
+      ] = `https://tarea2tallerfz.herokuapp.com/albums/${track.album.id}`;
+      console.log('Entre albums');
+      tracks[i][
+        'self'
+      ] = `https://tarea2tallerfz.herokuapp.com/tracks/${tracks[i].id}`;
+      console.log('Pase');
+    }
+
+    ctx.body = tracks;
     ctx.status = 200;
   } else {
     ctx.body = 'No existe el album';

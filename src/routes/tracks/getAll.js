@@ -5,7 +5,6 @@ export const getAll = async (ctx) => {
   const tracks = await prisma.track.findMany({
     include: {
       artist: true,
-      album: true,
     },
   });
   var i;
