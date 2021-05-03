@@ -5,7 +5,8 @@ export const addTrack = async (ctx) => {
   console.log(ctx.params);
   const args = ctx.request.body;
   console.log(args);
-  const idtrack = `${args.name}:${ctx.params.albumId}`;
+  const idtrac = btoa(`${args.name}:${ctx.params.albumId}`);
+  const idtrack = idtrac.substring(0, 22);
   console.log(idtrack);
   const album = await prisma.album.findUnique({
     where: {
@@ -23,7 +24,7 @@ export const addTrack = async (ctx) => {
       album: {
         connect: { id: ctx.params.albumId },
       },
-      id: btoa(idtrack),
+      id: idtrack,
     },
   });
   ctx.body = track;

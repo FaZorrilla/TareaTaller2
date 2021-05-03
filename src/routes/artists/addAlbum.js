@@ -5,7 +5,8 @@ export const addAlbum = async (ctx) => {
   console.log(ctx.params);
   const args = ctx.request.body;
   console.log(args);
-  const idalbum = `${args.name}:${ctx.params.artistId}`;
+  const idalbu = btoa(`${args.name}:${ctx.params.artistId}`);
+  const idalbum = idalbu.substring(0, 22);
   console.log(idalbum);
   const album = await prisma.album.create({
     data: {
@@ -14,7 +15,7 @@ export const addAlbum = async (ctx) => {
       artist: {
         connect: { id: ctx.params.artistId },
       },
-      id: btoa(idalbum),
+      id: idalbum,
     },
   });
   ctx.body = album;

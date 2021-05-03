@@ -7,6 +7,7 @@ import { add } from './add.js';
 import { addAlbum } from './addAlbum.js';
 import { getOne } from './getOne.js';
 import { getAlbums } from './getAlbums.js';
+import { getTracks } from './getTracks.js';
 
 //router.<metodo>(ruta relativa, method)
 artistsRouter.get('/', getAll);
@@ -14,3 +15,4 @@ artistsRouter.post('/', add);
 artistsRouter.post('/:artistId/albums', addAlbum);
 artistsRouter.get('/:artistId', getOne);
 artistsRouter.get('/:artistId/albums', getAlbums);
+artistsRouter.get('/:artistId/tracks', getTracks);
