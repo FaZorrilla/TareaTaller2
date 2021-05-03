@@ -11,29 +11,29 @@ generator client {
 }
 
 model Artist {
-  id String @id
-  name String
-  age Int
+  id     String  @id
+  name   String
+  age    Int
   tracks Track[]
   albums Album[]
 }
 
 model Album {
-  id String @id
-  name String
-  genre String
-  artist    Artist  @relation(fields: [artistId], references: [id])
-  artistId String
-  tracks Track[]
+  id       String  @id
+  name     String
+  genre    String
+  artist   Artist? @relation(fields: [artistId], references: [id])
+  artistId String?
+  tracks   Track[]
 }
 
 model Track {
-  id String @id
-  name String
-  duration Float
+  id          String  @id
+  name        String
+  duration    Float
   timesPlayed Int
-  artist    Artist  @relation(fields: [artistId], references: [id])
-  artistId String
-  album    Album  @relation(fields: [albumId], references: [id])
-  albumId String
+  artist      Artist? @relation(fields: [artistId], references: [id])
+  artistId    String?
+  album       Album?  @relation(fields: [albumId], references: [id])
+  albumId     String?
 }
